@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 
-  <title>Hamza Hamid</title>
+  <title>Hamza's Blog</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -24,7 +24,7 @@
         <div class="navbar-nav ml-auto">
           <a class="nav-link" href="https://www.linkedin.com/in/hamza-hamid-4a60291b8/" target="_blank">LinkedIn</a>
           <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-          <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+          <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
         </div>
       </div>
     </nav>
@@ -32,35 +32,23 @@
 
   <main role="main">
 
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">Hi, I am Hamza.</h1>
-        <p class="lead text-muted">Hey, I am Hamza Hamid. I love programming because it is awesome to know that you are contributing to human technological advancement.</p>
-        <p>
-          <a href="mailto:hamzano1@hotmail.co.uk" class="btn btn-primary my-2">Email Me</a>
-        </p>
-        <img src="{% static 'profile.png' %}" height=300 />
-      </div>
-    </section>
+    <div class="container">
+      <h1 class="text-center pt-3">Welcome to Hamza's blog</h1>
+      <br />
+      <br />
+      <h2>Latest Posts</h2>
+      <hr />
 
-    <div class="album py-5 bg-light">
-      <div class="container">
+      {% for blog in blogs.all %}
+      <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }}</h3></a>
+      {{ blog.pub_date_pretty }}
+      <br />
+      <img class="img-fluid" src="{{ blog.image.url }}" height=200 width=200 />
+      <br />
+      <p>{{ blog.summary }}</p>
+      {% endfor %}
 
-        <div class="row">
-          {% for job in jobs.all %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img class="card-img-top" src="{{ job.image.url }}" />
-              <div class="card-body">
-                <p class="card-text">{{ job.summary }}</p>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
     </div>
-
   </main>
 
   <footer class="text-muted">
